@@ -1,0 +1,55 @@
+{
+  "name": "Suivi Bébé",
+  "short_name": "SuiviBébé",
+  "description": "Une application simple pour suivre le quotidien de bébé.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F8F7FF",
+  "theme_color": "#7e78d2",
+  "orientation": "portrait",
+
+  "icons": [
+    { "src": "image/icon-72x72.png", "sizes": "72x72", "type": "image/png" },
+    { "src": "image/icon-96x96.png", "sizes": "96x96", "type": "image/png" },
+    { "src": "image/icon-144x144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "image/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "image/icon-512x512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "image/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Enregistrer un sommeil",
+      "short_name": "Sommeil",
+      "description": "Démarrer ou arrêter un cycle de sommeil",
+      "url": "/index.html#sommeil",
+      "icons": [{ "src": "image/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Ajouter un biberon",
+      "short_name": "Biberon",
+      "description": "Enregistrer un nouveau biberon",
+      "url": "/index.html#biberon",
+      "icons": [{ "src": "image/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Noter une couche",
+      "short_name": "Couche",
+      "description": "Enregistrer un changement de couche",
+      "url": "/index.html#couche",
+      "icons": [{ "src": "image/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Noter un allaitement",
+      "short_name": "Allaitement",
+      "description": "Enregistrer un nouvel allaitement",
+      "url": "/index.html#allaitement",
+      "icons": [{ "src": "image/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Appliquer les règles à la collection "events"
+    match /events/{eventId} {
+      // Un utilisateur peut lire un événement si son ID correspond à celui de l'événement
+      allow read: if request.auth.uid == resource.data.userId;
+      
+      // Un utilisateur peut créer un événement si son ID est bien celui qu'il met dans le document
+      allow create: if request.auth.uid == request.resource.data.userId;
+
+      // Un utilisateur peut modifier ou supprimer un événement s'il en est le propriétaire
+      allow update, delete: if request.auth.uid == resource.data.userId;
+    }
+  }
+}

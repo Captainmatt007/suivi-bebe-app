@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Bébé</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="/image/icon-192x192.png" type="image/png">
+    <link rel="apple-touch-icon" href="/image/icon-192x192.png">
+    <link rel="manifest" href="manifest.json" crossorigin="use-credentials">
+</head>
+<body>
+       <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Connexion en cours...</p>
+    </div>
+ <div id="offline-indicator" class="hidden">...</div>
+
+    <header>
+        <div class="brand">
+            <h1>Suivi Bébé</h1>
+            <p class="subtitle">Enregistrez chaque moment précieux</p>
+        </div>
+        <div class="header-actions">
+            <button id="theme-toggle-button" title="Changer le thème" aria-label="Changer le thème">🌙</button>
+            <button id="settings-button" title="Paramètres" aria-label="Paramètres">⚙️</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="accueil">
+            <div id="accueil-info" class="info-panel">
+                <div class="info-item"><span class="info-label">Prénom</span><span id="bebe-nom" class="info-value">Mon Bébé</span></div>
+                <div class="info-item"><span class="info-label">Âge</span><span id="bebe-age" class="info-value">-</span></div>
+                <div class="info-item"><span class="info-label">Dernier Poids</span><span id="bebe-poids" class="info-value">- kg</span></div>
+                <div class="info-item"><span class="info-label">Dernière Taille</span><span id="bebe-taille" class="info-value">- cm</span></div>
+            </div>
+
+            <div class="category-grid">
+                <button class="category-button" data-section="allaitement">🤱🏻 Allaitement</button>
+                <button class="category-button" data-section="biberon">🍼 Biberon</button>
+                <button class="category-button" data-section="couche"><img src="image/couches.png" alt="Couche"> Couche</button>
+                <button class="category-button" data-section="tire-lait"><img src="image/tire-lait.png" alt="Tire-Lait"> Tire-Lait</button>
+                <button class="category-button" data-section="sommeil">💤 Sommeil</button>
+                <button class="category-button" data-section="sante">❤️ Santé</button>
+                <button class="category-button" data-section="humeur">🎨 Humeur</button>
+                <button class="category-button" data-section="hygiene">🧼 Hygiène</button>
+                <button class="category-button" data-section="remarques">📝 Remarques</button>
+                <button class="category-button" data-section="recapitulatif">📊 Récapitulatif</button>
+            </div>
+        </section>
+
+        <div id="sections-wrapper" class="hidden">
+
+            <section id="allaitement">
+                <h2>Allaitement</h2>
+                <form id="form-allaitement">
+                    <label>Côté :</label>
+                    <div class="button-group">
+                        <button type="button" class="choice-button" data-cote="gauche">Gauche</button>
+                        <button type="button" class="choice-button" data-cote="droit">Droit</button>
+                    </div>
+                    <input type="hidden" id="cote-allaitement">
+                    <div class="chrono">
+                        <label>Durée : <span id="chrono-display">00:00</span></label>
+                        <div class="chrono-controls">
+                            <button type="button" id="start-chrono-allaitement">▶</button>
+                            <button type="button" id="stop-chrono-allaitement">⏹️</button>
+                        </div>
+                    </div>
+                    <button type="button" class="bouton-now" id="btn-now-allaitement">Maintenant</button>
+                    <label for="date-allaitement">Date :</label> <input type="date" id="date-allaitement" required>
+                    <label for="heure-allaitement">Heure :</label> <input type="time" id="heure-allaitement" required>
+                    <label for="remarques-allaitement">Remarques :</label>
+                    <textarea id="remarques-allaitement" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+
+            <section id="biberon">
+                <h2>Biberon</h2>
+                <form id="form-biberon">
+                    <button type="button" class="bouton-now" id="btn-now-biberon">Maintenant</button>
+                    <label for="date-biberon">Date & Heure :</label>
+                    <div class="input-group">
+                        <input type="date" id="date-biberon" required>
+                        <input type="time" id="heure-biberon" required>
+                    </div>
+                    <label>Type de lait :</label>
+                    <div class="button-group">
+                        <button type="button" class="choice-button" data-lait="artificiel">Artificiel</button>
+                        <button type="button" class="choice-button" data-lait="maternel">Maternel</button>
+                    </div>
+                    <input type="hidden" id="type-lait">
+                    <label for="quantite-preparee">Quantité préparée (ml) :</label>
+                    <input type="number" id="quantite-preparee" placeholder="ex: 120">
+                    <label for="quantite-bue">Quantité bue (ml) :</label>
+                    <input type="number" id="quantite-bue" placeholder="ex: 110">
+                    <label for="remarques-biberon">Remarques :</label>
+                    <textarea id="remarques-biberon" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+
+            <section id="couche">
+                <h2>Couche</h2>
+                <form id="form-couche">
+                    <button type="button" class="bouton-now" id="btn-now-couche">Maintenant</button>
+                    <label for="date-couche">Date :</label> <input type="date" id="date-couche" required>
+                    <label for="heure-couche">Heure :</label> <input type="time" id="heure-couche" required>
+                    <label>Contenu :</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="check-pipi"> <label for="check-pipi">Pipi</label>
+                        <input type="checkbox" id="check-selle"> <label for="check-selle">Selle</label>
+                    </div>
+                    <div id="details-selle" class="hidden">
+                        <label for="couleur-couche">Couleur des selles :</label>
+                        <select id="couleur-couche"><option value="">(aucune)</option><option value="jaunes">Jaunes</option><option value="vertes">Vertes</option><option value="marrons">Marrons</option><option value="noires">Noires</option><option value="sang">Sang</option><option value="autres">Autres</option></select>
+                        <div id="autre-couleur-wrapper" class="hidden"><label for="autre-couleur-input">Précisez la couleur :</label><input type="text" id="autre-couleur-input" placeholder="ex: Blanc laiteux"></div>
+                        <label for="consistance-selle">Consistance :</label>
+                        <select id="consistance-selle"><option value="">(aucune)</option><option value="normale">Normale</option><option value="liquide">Liquide</option><option value="molle">Molle</option><option value="dure">Dure</option></select>
+                    </div>
+                    <label for="remarques-couche">Remarques :</label>
+                    <textarea id="remarques-couche" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+
+            <section id="tire-lait">
+                <h2>Tire-Lait</h2>
+                <form id="form-tire-lait">
+                    <button type="button" class="bouton-now" id="btn-now-tire-lait">Maintenant</button>
+                    <label for="date-tire-lait">Date & Heure :</label>
+                    <div class="input-group">
+                        <input type="date" id="date-tire-lait" required>
+                        <input type="time" id="heure-tire-lait" required>
+                    </div>
+                    <label>Côté :</label>
+                    <div class="button-group">
+                        <button type="button" class="choice-button" data-cote="gauche">Gauche</button>
+                        <button type="button" class="choice-button" data-cote="droit">Droit</button>
+                        <button type="button" class="choice-button" data-cote="les_deux">Les deux</button>
+                    </div>
+                    <input type="hidden" id="cote-tire-lait">
+                    <div class="conditional-inputs">
+                        <div id="quantite-gauche-wrapper" class="hidden"><label for="quantite-gauche">Quantité Gauche (ml):</label><input type="number" id="quantite-gauche"></div>
+                        <div id="quantite-droite-wrapper" class="hidden"><label for="quantite-droite">Quantité Droite (ml):</label><input type="number" id="quantite-droite"></div>
+                    </div>
+                    <div class="chrono">
+                        <label>Durée : <span id="chrono-display-tire-lait">00:00</span></label>
+                        <div class="chrono-controls">
+                            <button type="button" id="start-chrono-tire-lait">▶</button>
+                            <button type="button" id="stop-chrono-tire-lait">⏹️</button>
+                        </div>
+                    </div>
+                    <label for="remarques-tire-lait">Remarques :</label>
+                    <textarea id="remarques-tire-lait" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+            
+            <section id="sommeil">
+              <h2>Sommeil</h2>
+              <div id="ongoing-sleep-info" class="ongoing-info hidden">
+                  <p>😴 Sommeil en cours depuis : <strong id="sleep-start-time"></strong></p>
+              </div>
+
+              <form id="form-sommeil">
+                  <button type="button" id="start-sleep-btn" class="bouton-principal">Début du sommeil</button>
+              </form>
+              
+              <form id="form-sleep-end">
+                <fieldset>
+                    <legend>Fin du sommeil</legend>
+                    <button type="button" class="bouton-now" id="btn-now-sommeil-fin">Fin maintenant</button>
+                    <div class="form-row">
+                        <div class="input-wrapper">
+                            <label for="date-fin-sommeil">Date :</label><input type="date" id="date-fin-sommeil">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="heure-fin-sommeil">Heure :</label><input type="time" id="heure-fin-sommeil">
+                        </div>
+                    </div>
+                </fieldset>
+                <label for="remarques-sommeil">Remarques :</label>
+                <textarea id="remarques-sommeil" rows="3"></textarea>
+                <button type="submit" class="bouton-principal">Enregistrer la Fin</button>
+                <button type="button" class="bouton-retour">Retour</button>
+              </form>
+            </section>
+
+            <section id="sante">
+                <h2>Santé</h2>
+                <form id="form-sante">
+                    <div class="form-row">
+                        <div class="input-wrapper">
+                            <label>L'enfant est-il malade ?</label>
+                            <div class="button-group">
+                                <button type="button" class="choice-button" data-malade="non">😊 Bien</button>
+                                <button type="button" class="choice-button" data-malade="oui">🤒 Malade</button>
+                            </div>
+                            <input type="hidden" id="malade-status">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-wrapper">
+                            <label for="date-sante">Date :</label>
+                            <input type="date" id="date-sante" required>
+                        </div>
+                        <button type="button" class="bouton-now" id="btn-now-sante">Maintenant</button>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <label for="temperature">Température (°C) :</label>
+                        <input type="number" id="temperature" step="0.1" placeholder="ex: 37.5">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-wrapper">
+                            <label for="poids">Poids (kg) :</label>
+                            <input type="number" id="poids" step="0.01" placeholder="ex: 3.5">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="taille">Taille (cm) :</label>
+                            <input type="number" id="taille" step="0.5" placeholder="ex: 50">
+                        </div>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <label for="remarques-sante">Remarques :</label>
+                        <textarea id="remarques-sante" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+
+            <section id="humeur">
+                <h2>Humeur</h2>
+                <form id="form-humeur">
+                    <button type="button" class="bouton-now" id="btn-now-humeur">Maintenant</button>
+                    <label for="date-humeur">Date :</label> <input type="date" id="date-humeur" required>
+                    <label for="heure-humeur">Heure :</label> <input type="time" id="heure-humeur" required>
+                    <label for="select-humeur">Humeur :</label>
+                    <select id="select-humeur" required>
+                      <option value="joyeux">Joyeux</option><option value="fatigue">Fatigué</option><option value="calme">Calme</option><option value="curieux">Curieux</option><option value="actif">Actif</option><option value="agite">Grognon</option><option value="stress">Stressé</option><option value="pleurs">Pleurs</option><option value="pleurs_douleur">Pleurs de douleur</option><option value="pleurs_decharge">Pleurs de décharge</option>
+                    </select>
+                    <label for="remarques-humeur">Remarques :</label>
+                    <textarea id="remarques-humeur" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+            
+            <section id="hygiene">
+                <h2>Hygiène</h2>
+                <form id="form-hygiene">
+                    <button type="button" class="bouton-now" id="btn-now-hygiene">Maintenant</button>
+                    <label for="date-hygiene">Date :</label> <input type="date" id="date-hygiene" required>
+                    <fieldset>
+                        <legend>Soins</legend>
+                        <div class="checkbox-group full-width"><input type="checkbox" id="check-bain"> <label for="check-bain">Bain</label></div>
+                        <div class="checkbox-group full-width"><input type="checkbox" id="check-dents"> <label for="check-dents">Brossage de dents</label></div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Nettoyage du nez</legend>
+                        <div class="checkbox-group full-width"><input type="checkbox" id="check-serum"> <label for="check-serum">Sérum physiologique</label></div>
+                        <div class="checkbox-group full-width"><input type="checkbox" id="check-mouche-bebe"> <label for="check-mouche-bebe">Mouche-bébé</label></div>
+                    </fieldset>
+                    <label for="remarques-hygiene">Remarques :</label>
+                    <textarea id="remarques-hygiene" rows="3"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+            
+            <section id="remarques">
+                <h2>Remarques Générales</h2>
+                <form id="form-remarques">
+                    <button type="button" class="bouton-now" id="btn-now-remarques">Maintenant</button>
+                    <label for="date-remarques">Date :</label> <input type="date" id="date-remarques" required>
+                    <label for="texte-remarques">Remarque :</label> <textarea id="texte-remarques" rows="4"></textarea>
+                    <button type="submit" class="bouton-principal">Enregistrer</button>
+                    <button type="button" class="bouton-retour">Retour</button>
+                </form>
+            </section>
+
+<section id="recapitulatif">
+    <h2>Évolution</h2>
+    
+    <div class="chart-container">
+        <canvas id="growthChart"></canvas>
+    </div>
+
+    <button id="get-recap-gemini-button" class="bouton-principal">Générer le récapitulatif IA</button>
+    
+    <div class="button-group-recap">
+        <button type="button" class="bouton-retour">Retour</button>
+    </div>
+</section>
+        </div>
+
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Paramètres</h2>
+                <form id="form-settings">
+                    <label for="input-bebe-nom">Prénom de l'enfant :</label>
+                    <input type="text" id="input-bebe-nom" placeholder="Prénom">
+                    <label for="input-bebe-dob">Date de naissance :</label>
+                    <input type="date" id="input-bebe-dob">
+                    <button type="submit" class="bouton-principal">Enregistrer les paramètres</button>
+                </form>
+            </div>
+        </div>
+    </main>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-functions-compat.js"></script>
+    
+    <script src="script.js"></script>
+ <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker enregistré avec succès :', registration);
+                    })
+                    .catch(error => {
+                        console.log('Échec de l\'enregistrement du Service Worker :', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
